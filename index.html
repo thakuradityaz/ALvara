@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvara - Institution Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --radius: 12px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --light: #0f172a;
+            --dark: #f8fafc;
+            --gray: #94a3b8;
+            --gray-light: #1e293b;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .dark-mode header {
+            background-color: rgba(15, 23, 42, 0.95);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            font-style: normal;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dark-mode nav ul li a {
+            color: var(--dark);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: var(--gray-light);
+            border: none;
+            width: 50px;
+            height: 26px;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 3px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle span {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            display: block;
+            position: absolute;
+            transition: var(--transition);
+            left: 3px;
+        }
+
+        .dark-mode .theme-toggle span {
+            left: calc(100% - 23px);
+            background: var(--dark);
+        }
+
+        .language-toggle {
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-light);
+            background: transparent;
+            color: var(--dark);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dark-mode .language-toggle {
+            border-color: var(--gray);
+            color: var(--dark);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-menu-btn {
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 0 0 0 100px;
+            z-index: 0;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .dark-mode .hero h1 {
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: var(--gray);
+        }
+
+        .dark-mode .hero p {
+            color: var(--gray);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            z-index: 1;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-53%) translateX(10px); }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .dark-mode .stats {
+            background: var(--light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dark-mode .stat-card {
+            background: var(--gray-light);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .dark-mode .stat-number {
+            color: var(--dark);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 16px;
+        }
+
+        .dark-mode .stat-label {
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .dark-mode .features {
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .dark-mode .section-title {
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        .dark-mode .section-subtitle {
+            color: var(--gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .dark-mode .feature-card {
+            background: var(--gray-light);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: white;
+        }
+
+        .feature-icon.task {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .feature-icon.library {
+            background: linear-gradient(135deg, var(--secondary), #6d28d9);
+        }
+
+        .feature-icon.transport {
+            background: linear-gradient(135deg, var(--accent), #db2777);
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .dark-mode .feature-title {
+            color: var(--dark);
+        }
+
+        .feature-desc {
+            color: var(--gray);
+            font-size: 16px;
+        }
+
+        .dark-mode .feature-desc {
+            color: var(--gray);
+        }
+
+        /* Register Section */
+        .register {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .register .section-title,
+        .register .section-subtitle {
+            color: white;
+        }
+
+        .register-form {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .dark-mode .register-form {
+            background: var(--gray-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .dark-mode .form-group label {
+            color: var(--dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .dark-mode .form-group input {
+            background: var(--light);
+            border-color: var(--gray);
+            color: var(--dark);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .dark-mode .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dark-mode .testimonial-card {
+            background: var(--gray-light);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .dark-mode .testimonial-text {
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .testimonial-info h4 {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .dark-mode .testimonial-info h4 {
+            color: var(--dark);
+        }
+
+        .testimonial-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .dark-mode .testimonial-info p {
+            color: var(--gray);
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .download-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .dark-mode footer {
+            background: var(--dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-bg {
+                width: 100%;
+                border-radius: 0;
+                opacity: 0.1;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-image {
+                position: relative;
+                margin: 40px auto 0;
+                width: 80%;
+                transform: none;
+                right: auto;
+                top: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 15px 0;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--light);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .dark-mode nav {
+                background: var(--light);
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 40px 20px;
+                gap: 20px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 130px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .feature-card, .stat-card, .testimonial-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .register-form {
+                padding: 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="./alvara.png" alt="Alvara Logo">
+                    <span class="logo-text">Alvara</span>
+                </a>
+
+                <nav id="nav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#stats">Stats</a></li>
+                        <li><a href="#register">Register</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <span></span>
+                    </button>
+                    <select class="language-toggle" id="languageToggle">
+                        <option value="en">EN</option>
+                        <option value="hi">HI</option>
+                    </select>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Streamline Your Institution Management</h1>
+                <p>Alvara helps educational institutions manage tasks, library resources, and transport systems all in one place with our powerful, intuitive platform.</p>
+                <div class="hero-actions">
+                    <a href="#register" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Register Your Institute
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i> Watch Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Alvara App Interface" class="hero-image">
+    </section>
+
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-label">Institutions Registered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-number" data-count="120000">0</div>
+                    <div class="stat-label">Tasks Managed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-number" data-count="75000">0</div>
+                    <div class="stat-label">Library Transactions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Designed to streamline institution management with efficiency and ease</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon task">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">Task Management</h3>
+                    <p class="feature-desc">Effortlessly assign and track tasks for students and staff with our intuitive system. Set deadlines, priorities, and receive notifications.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon library">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="feature-title">Library Access</h3>
+                    <p class="feature-desc">Manage library resources, track borrowing, and maintain records with ease. Digital catalog and automated reminders for returns.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon transport">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3 class="feature-title">Transport Tracking</h3>
+                    <p class="feature-desc">Real-time monitoring of institution transport schedules and vehicle locations. Parents can track buses and receive arrival alerts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="register" id="register">
+        <div class="container">
+            <div class="register-content">
+                <div class="section-header">
+                    <h2 class="section-title">Register Your Institution</h2>
+                    <p class="section-subtitle">Join hundreds of institutions already using Alvara to streamline their operations</p>
+                </div>
+
+                <div class="register-form">
+                    <div class="form-group">
+                        <label for="institution-name">Institution Name</label>
+                        <input type="text" id="institution-name" placeholder="Enter your institution name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-name">Admin Name</label>
+                        <input type="text" id="admin-name" placeholder="Enter admin's full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="students">Number of Students</label>
+                        <input type="number" id="students" placeholder="Approximate number of students">
+                    </div>
+
+                    <button class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Submit Registration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <p class="section-subtitle">Hear from institutions that have transformed their operations with Alvara</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Alvara has completely transformed how we manage our institution. The task management system alone has saved us countless hours of administrative work."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Dr. Rajesh Sharma</h4>
+                            <p>Principal, Delhi Public School</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The library management module is exceptional. We've reduced book loss by 75% and students find it much easier to browse and reserve books digitally."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Priya Mehta</h4>
+                            <p>Librarian, St. Mary's College</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Parents love the transport tracking feature. They can see exactly where the bus is and when it will arrive. It's brought peace of mind to everyone."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Vikram Singh</h4>
+                            <p>Transport Manager, Modern Academy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download-content">
+                <div class="section-header">
+                    <h2 class="section-title">Get Started with Alvara</h2>
+                    <p class="section-subtitle">Download our app or request a demo to see how Alvara can transform your institution</p>
+                </div>
+
+                <div class="download-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download App
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-calendar"></i> Schedule a Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/6RJ5h4x/alvara.jpg" alt="Alvara Logo">
+                        <span class="footer-logo-text">Alvara</span>
+                    </div>
+                    <p class="footer-desc">Streamlining institution management with powerful tools for tasks, library, and transport systems.</p>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#stats">Stats</a></li>
+                        <li><a href="#register">Register</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@alvara.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (234) 567-8900</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Alvara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('nav');
+        const languageToggle = document.getElementById('languageToggle');
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Language Toggle
+        languageToggle.addEventListener('change', () => {
+            alert(`Language changed to ${languageToggle.value === 'en' ? 'English' : 'Hindi'}`);
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    nav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animated counter for stats
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounter = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = count + increment;
+                    setTimeout(() => animateCounter(), 1);
+                } else {
+                    counter.innerText = target.toLocaleString();
+                }
+            });
+        };
+
+        // Run counter when stats section is in view
+        const statsSection = document.getElementById('stats');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    </script>
+</body>
+</html>

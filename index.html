@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alvara - Institution Management System</title>
+    <title>Alvara - Complete Institution Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -23,15 +23,6 @@
             --transition: all 0.3s ease;
         }
 
-        .dark-mode {
-            --light: #0f172a;
-            --dark: #f8fafc;
-            --gray: #94a3b8;
-            --gray-light: #1e293b;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +34,6 @@
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            transition: var(--transition);
             overflow-x: hidden;
         }
 
@@ -66,10 +56,6 @@
             transition: var(--transition);
         }
 
-        .dark-mode header {
-            background-color: rgba(15, 23, 42, 0.95);
-        }
-
         .header-content {
             display: flex;
             justify-content: space-between;
@@ -81,18 +67,19 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            text-decoration: none;
         }
 
         .logo img {
-            height: 40px;
+            height: 50px;
             width: auto;
         }
 
         .logo-text {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--primary);
-            font-style: normal;
+            text-decoration: none;
         }
 
         nav ul {
@@ -105,68 +92,19 @@
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
-            font-size: 16px;
+            font-size: 18px;
             transition: var(--transition);
             position: relative;
-        }
-
-        .dark-mode nav ul li a {
-            color: var(--dark);
         }
 
         nav ul li a:hover {
             color: var(--primary);
         }
 
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
         .header-actions {
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-
-        .theme-toggle {
-            background: var(--gray-light);
-            border: none;
-            width: 50px;
-            height: 26px;
-            border-radius: 50px;
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 0 3px;
-            transition: var(--transition);
-        }
-
-        .theme-toggle span {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: white;
-            display: block;
-            position: absolute;
-            transition: var(--transition);
-            left: 3px;
-        }
-
-        .dark-mode .theme-toggle span {
-            left: calc(100% - 23px);
-            background: var(--dark);
         }
 
         .language-toggle {
@@ -180,11 +118,6 @@
             transition: var(--transition);
         }
 
-        .dark-mode .language-toggle {
-            border-color: var(--gray);
-            color: var(--dark);
-        }
-
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -192,10 +125,6 @@
             font-size: 24px;
             color: var(--dark);
             cursor: pointer;
-        }
-
-        .dark-mode .mobile-menu-btn {
-            color: var(--dark);
         }
 
         /* Hero Section */
@@ -230,17 +159,9 @@
             color: var(--dark);
         }
 
-        .dark-mode .hero h1 {
-            color: var(--dark);
-        }
-
         .hero p {
             font-size: 20px;
             margin-bottom: 40px;
-            color: var(--gray);
-        }
-
-        .dark-mode .hero p {
             color: var(--gray);
         }
 
@@ -314,10 +235,6 @@
             background: var(--light);
         }
 
-        .dark-mode .stats {
-            background: var(--light);
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -331,10 +248,6 @@
             text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
-        }
-
-        .dark-mode .stat-card {
-            background: var(--gray-light);
         }
 
         .stat-card:hover {
@@ -355,17 +268,9 @@
             color: var(--dark);
         }
 
-        .dark-mode .stat-number {
-            color: var(--dark);
-        }
-
         .stat-label {
             color: var(--gray);
             font-size: 16px;
-        }
-
-        .dark-mode .stat-label {
-            color: var(--gray);
         }
 
         /* Features Section */
@@ -374,13 +279,9 @@
             background: var(--light);
         }
 
-        .dark-mode .features {
-            background: var(--light);
-        }
-
         .section-header {
             text-align: center;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto 60px;
         }
 
@@ -391,16 +292,8 @@
             color: var(--dark);
         }
 
-        .dark-mode .section-title {
-            color: var(--dark);
-        }
-
         .section-subtitle {
             font-size: 18px;
-            color: var(--gray);
-        }
-
-        .dark-mode .section-subtitle {
             color: var(--gray);
         }
 
@@ -417,10 +310,9 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             text-align: center;
-        }
-
-        .dark-mode .feature-card {
-            background: var(--gray-light);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .feature-card:hover {
@@ -452,6 +344,22 @@
             background: linear-gradient(135deg, var(--accent), #db2777);
         }
 
+        .feature-icon.profile {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .feature-icon.live {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .feature-icon.communication {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .feature-icon.hostel {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+
         .feature-title {
             font-size: 22px;
             font-weight: 600;
@@ -459,17 +367,10 @@
             color: var(--dark);
         }
 
-        .dark-mode .feature-title {
-            color: var(--dark);
-        }
-
         .feature-desc {
             color: var(--gray);
             font-size: 16px;
-        }
-
-        .dark-mode .feature-desc {
-            color: var(--gray);
+            flex-grow: 1;
         }
 
         /* Register Section */
@@ -503,10 +404,6 @@
             text-align: left;
         }
 
-        .dark-mode .register-form {
-            background: var(--gray-light);
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -516,10 +413,7 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--dark);
-        }
-
-        .dark-mode .form-group label {
-            color: var(--dark);
+            font-size: 16px;
         }
 
         .form-group input {
@@ -529,12 +423,6 @@
             border-radius: var(--radius);
             font-size: 16px;
             transition: var(--transition);
-        }
-
-        .dark-mode .form-group input {
-            background: var(--light);
-            border-color: var(--gray);
-            color: var(--dark);
         }
 
         .form-group input:focus {
@@ -553,10 +441,6 @@
             background: var(--light);
         }
 
-        .dark-mode .testimonials {
-            background: var(--light);
-        }
-
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -571,10 +455,6 @@
             transition: var(--transition);
         }
 
-        .dark-mode .testimonial-card {
-            background: var(--gray-light);
-        }
-
         .testimonial-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
@@ -583,10 +463,6 @@
         .testimonial-text {
             font-style: italic;
             margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .dark-mode .testimonial-text {
             color: var(--dark);
         }
 
@@ -611,19 +487,12 @@
         .testimonial-info h4 {
             font-weight: 600;
             color: var(--dark);
-        }
-
-        .dark-mode .testimonial-info h4 {
-            color: var(--dark);
+            font-size: 18px;
         }
 
         .testimonial-info p {
             color: var(--gray);
             font-size: 14px;
-        }
-
-        .dark-mode .testimonial-info p {
-            color: var(--gray);
         }
 
         /* Download Section */
@@ -652,10 +521,6 @@
             padding: 60px 0 30px;
         }
 
-        .dark-mode footer {
-            background: var(--dark);
-        }
-
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -668,17 +533,19 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
+            text-decoration: none;
         }
 
         .footer-logo img {
-            height: 30px;
+            height: 40px;
             width: auto;
         }
 
         .footer-logo-text {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             color: white;
+            text-decoration: none;
         }
 
         .footer-desc {
@@ -705,6 +572,7 @@
             color: var(--gray);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 16px;
         }
 
         .footer-links a:hover {
@@ -719,6 +587,12 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 50px;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero-bg {
                 width: 100%;
@@ -732,7 +606,7 @@
             }
 
             .hero h1 {
-                font-size: 48px;
+                font-size: 42px;
             }
 
             .hero-actions {
@@ -746,6 +620,10 @@
                 transform: none;
                 right: auto;
                 top: auto;
+            }
+            
+            .section-title {
+                font-size: 36px;
             }
         }
 
@@ -763,10 +641,6 @@
                 background: var(--light);
                 transition: var(--transition);
                 z-index: 999;
-            }
-
-            .dark-mode nav {
-                background: var(--light);
             }
 
             nav.active {
@@ -802,6 +676,14 @@
             .feature-card, .stat-card, .testimonial-card {
                 padding: 20px;
             }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -819,6 +701,40 @@
             }
 
             .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-actions .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-buttons .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -844,9 +760,6 @@
                 </nav>
 
                 <div class="header-actions">
-                    <button class="theme-toggle" id="themeToggle">
-                        <span></span>
-                    </button>
                     <select class="language-toggle" id="languageToggle">
                         <option value="en">EN</option>
                         <option value="hi">HI</option>
@@ -863,7 +776,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Streamline Your Institution Management</h1>
-                <p>Alvara helps educational institutions manage tasks, library resources, and transport systems all in one place with our powerful, intuitive platform.</p>
+                <p>Alvara helps educational institutions manage tasks, library resources, transport systems, and hostel facilities all in one <br> place with our powerful, intuitive platform.</p>
                 <div class="hero-actions">
                     <a href="#register" class="btn btn-primary">
                         <i class="fas fa-user-plus"></i> Register Your Institute
@@ -885,29 +798,29 @@
                     <div class="stat-icon">
                         <i class="fas fa-school"></i>
                     </div>
-                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-number" data-count="350">0</div>
                     <div class="stat-label">Institutions Registered</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-number" data-count="75000">0</div>
                     <div class="stat-label">Active Users</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-tasks"></i>
                     </div>
-                    <div class="stat-number" data-count="120000">0</div>
+                    <div class="stat-number" data-count="150000">0</div>
                     <div class="stat-label">Tasks Managed</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-book"></i>
+                        <i class="fas fa-bed"></i>
                     </div>
-                    <div class="stat-number" data-count="75000">0</div>
-                    <div class="stat-label">Library Transactions</div>
+                    <div class="stat-number" data-count="25000">0</div>
+                    <div class="stat-label">Hostel Residents</div>
                 </div>
             </div>
         </div>
@@ -916,7 +829,7 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Powerful Features</h2>
+                <h2 class="section-title">Comprehensive Management Features</h2>
                 <p class="section-subtitle">Designed to streamline institution management with efficiency and ease</p>
             </div>
 
@@ -943,6 +856,30 @@
                     </div>
                     <h3 class="feature-title">Transport Tracking</h3>
                     <p class="feature-desc">Real-time monitoring of institution transport schedules and vehicle locations. Parents can track buses and receive arrival alerts.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon profile">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="feature-title">Lifetime Student Profile</h3>
+                    <p class="feature-desc">Maintain comprehensive student records that follow them throughout their educational journey, from enrollment to alumni status.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon live">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Live Transportation System</h3>
+                    <p class="feature-desc">Real-time GPS tracking of school buses with live updates for parents and administrators. Receive alerts for delays and route changes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon hostel">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3 class="feature-title">Hostel Management</h3>
+                    <p class="feature-desc">Complete hostel management system with room allocation, meal planning, attendance tracking, and maintenance requests.</p>
                 </div>
             </div>
         </div>
@@ -1025,14 +962,14 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Parents love the transport tracking feature. They can see exactly where the bus is and when it will arrive. It's brought peace of mind to everyone."</p>
+                    <p class="testimonial-text">"The hostel management system has streamlined our operations tremendously. Room allocation, maintenance requests, and meal planning are now effortless."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="testimonial-info">
-                            <h4>Vikram Singh</h4>
-                            <p>Transport Manager, Modern Academy</p>
+                            <h4>Anil Kumar</h4>
+                            <p>Hostel Warden, Modern Academy</p>
                         </div>
                     </div>
                 </div>
@@ -1064,11 +1001,11 @@
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <div class="footer-logo">
+                    <a href="#" class="footer-logo">
                         <img src="https://i.ibb.co/6RJ5h4x/alvara.jpg" alt="Alvara Logo">
                         <span class="footer-logo-text">Alvara</span>
-                    </div>
-                    <p class="footer-desc">Streamlining institution management with powerful tools for tasks, library, and transport systems.</p>
+                    </a>
+                    <p class="footer-desc">Streamlining institution management with powerful tools for tasks, library, transport, and hostel systems.</p>
                 </div>
 
                 <div>
@@ -1109,16 +1046,9 @@
 
     <script>
         // DOM Elements
-        const themeToggle = document.getElementById('themeToggle');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const nav = document.getElementById('nav');
         const languageToggle = document.getElementById('languageToggle');
-
-        // Theme Toggle
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-        });
 
         // Mobile Menu Toggle
         mobileMenuBtn.addEventListener('click', () => {
@@ -1131,11 +1061,6 @@
         languageToggle.addEventListener('change', () => {
             alert(`Language changed to ${languageToggle.value === 'en' ? 'English' : 'Hindi'}`);
         });
-
-        // Check for saved theme preference
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
